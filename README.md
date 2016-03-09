@@ -2,7 +2,7 @@
 
 CODE version: xCode 7.2.1, Swift 2.0
 
-README version: xCode 6.0, Swift 1.0
+README version: xCode 7.2.1, Swift 2.0
 
 =======================
 
@@ -137,6 +137,7 @@ When you run your code, you can change orientation by going to 'Hardware' and cl
 
 ##### Create a custom view controller that is a subclass of UIViewController
 1. Choose File > New > File (or press Command-N)
+1. Choose the Cocoa Touch Class under iOS Source, and click Next ![](/img/img_12.png)
 1. Fill in as follows ![](/img/img_7.png)
 1. Click Next, and Create
 1. The Targets section will default to having your app selected and the tests for your app unselected. That’s perfect, so leave that as is
@@ -151,9 +152,8 @@ Now that you’ve created a custom view controller subclass, you need to tell yo
 
 ##### Create a custom table view controller that is a subclass of UITableViewController
 1. Choose File > New > File (or press Command-N)
-1. On the left of the dialog that appears, select the Cocoa Touch Class under iOS
-1. ![](/img/img_8.png)
-1. Click Next
+1. Choose the Cocoa Touch Class under iOS Source, and click Next
+1. Fill in as follows ![](/img/img_8.png)
 1. Click Next, and Create
 1. The Targets section will default to having your app selected and the tests for your app unselected. That’s perfect, so leave that as is
 1. In the project navigator, select Main.storyboard
@@ -179,7 +179,7 @@ Now that you’ve created a custom view controller subclass, you need to tell yo
 
 ##### Create a Data Class
 1. Choose File > New > File
-1. Select Cocoa Touch Class and click Next
+1. Choose the Cocoa Touch Class under iOS Source, and click Next
 1. Fill in as follows ![](/img/img_9.png)
 1. Click Next, and Create
 Your class should look like this
@@ -250,8 +250,9 @@ Your class should look like this
 <this function looks retarded because: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Functions.html#//apple_ref/doc/uid/TP40014097-CH10-XID_202 (go to External Parameter Names>
 1. The last function we need will generate UITableViewCells for each row at a specific index
   ```swift
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-      let tempCell = tableView.dequeueReusableCellWithIdentifier("ListPrototypeCell") as UITableViewCell
+  override func tableView(tableView: UITableView?, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+      let foo = tableView!.dequeueReusableCellWithIdentifier("ListPrototypeCell") as UITableViewCell?
+      let tempCell = foo!
       let todoItem = todoItems[indexPath.row]
 
       // Downcast from UILabel? to UILabel
@@ -329,7 +330,7 @@ Your class should look like this
     if (countElements(self.textField.text) > 0) {
         self.todoItem = TodoItem(itemName: self.textField.text)
     }
-  }  
+  }
   ```
 1. Now, we need to head back over to TodoListTableTableViewController.swift and add an unwind that takes the data that AddTodoItemViewController.swift is holding and pops into the array of todoItems:
   ```swift
